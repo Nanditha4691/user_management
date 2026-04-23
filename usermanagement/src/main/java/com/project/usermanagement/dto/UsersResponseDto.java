@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.project.usermanagement.entity.Gender;
 
+
 public class UsersResponseDto {
 	 private String username;
 	    private String email;
