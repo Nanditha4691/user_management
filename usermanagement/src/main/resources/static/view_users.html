@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Users</title>
+
+    <style>
+        body { font-family:Arial; text-align:center; }
+        table {
+            width:90%; margin:auto;
+            border-collapse:collapse;
+        }
+        th, td {
+            border:1px solid black;
+            padding:10px;
+        }
+        button {
+            padding:5px 10px;
+            background:red;
+            color:white;
+            border:none;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>All Users</h2>
+
+<button onclick="loadUsers()">Load Users</button>
+
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Mobile</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="userTable"></tbody>
+</table>
+
+<script>
+const BASE_URL = "http://localhost:8080";
+
+function loadUsers() {
+    fetch(BASE_URL + "/viewAllUsers")
+    .then(res => res.json())
+    .then(data => {
+        let table = document.getElementById("userTable");
+        table.innerHTML = "";
+
+        data.forEach(u => {
+            table.innerHTML += `
+            <tr>
+                <td>${u.id}</td>
+                <td>${u.username}</td>
+                <td>${u.email}</td>
+                <td>${u.mobile}</td>
+                <td>
+                    <button onclick="deleteUser(${u.id})">Delete</button>
+                </td>
+            </tr>`;
+        });
+    });
+}
+
+function deleteUser(id) {
+    fetch(BASE_URL + "/deleteUser/" + id, {method:"DELETE"})
+    .then(res => res.text())
+    .then(msg => {
+        alert(msg);
+        loadUsers();
+    });
+}
+</script>
+
+</body>
+</html>

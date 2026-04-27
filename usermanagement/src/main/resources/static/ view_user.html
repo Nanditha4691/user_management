@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search User</title>
+
+    <style>
+        body { text-align:center; font-family:Arial; }
+        input { padding:10px; }
+        button { padding:10px; }
+    </style>
+</head>
+
+<body>
+
+<h2>Search User</h2>
+
+<input type="number" id="userId" placeholder="Enter ID">
+<button onclick="searchUser()">Search</button>
+
+<div id="result"></div>
+
+<script>
+const BASE_URL = "http://localhost:8080";
+
+function searchUser() {
+    let id = document.getElementById("userId").value;
+
+    fetch(BASE_URL + "/searchUser/" + id)
+    .then(res => res.json())
+    .then(u => {
+        document.getElementById("result").innerHTML =
+        `<h3>${u.username}</h3>
+         <p>${u.email}</p>
+         <p>${u.mobile}</p>`;
+    })
+    .catch(() => alert("User not found"));
+}
+</script>
+
+</body>
+</html>

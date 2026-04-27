@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update User</title>
+
+    <style>
+        body { text-align:center; font-family:Arial; }
+        input { margin:5px; padding:10px; }
+        button { padding:10px; background:orange; }
+    </style>
+</head>
+
+<body>
+
+<h2>Update User</h2>
+
+<input type="number" id="id" placeholder="ID"><br>
+<input type="text" id="username" placeholder="Username"><br>
+<input type="email" id="email" placeholder="Email"><br>
+<input type="text" id="mobile" placeholder="Mobile"><br>
+
+<button onclick="updateUser()">Update</button>
+
+<script>
+const BASE_URL = "http://localhost:8080";
+
+function updateUser() {
+    const user = {
+        id: id.value,
+        username: username.value,
+        email: email.value,
+        mobile: mobile.value
+    };
+
+    fetch(BASE_URL + "/updateUser", {
+        method: "PUT",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(user)
+    })
+    .then(res => res.json())
+    .then(() => alert("Updated Successfully"))
+    .catch(err => console.error(err));
+}
+</script>
+
+</body>
+</html>

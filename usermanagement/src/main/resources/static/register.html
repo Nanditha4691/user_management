@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register User</title>
+
+    <style>
+        body { font-family: Arial; background:#f4f4f4; text-align:center; }
+        .box {
+            background:white; padding:20px; width:300px;
+            margin:50px auto; border-radius:10px;
+            box-shadow:0 0 10px gray;
+        }
+        input, select {
+            width:100%; padding:8px; margin:5px 0;
+        }
+        button {
+            width:100%; padding:10px;
+            background:blue; color:white; border:none;
+            cursor:pointer;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="box">
+    <h2>Register User</h2>
+
+    <input type="text" id="username" placeholder="Username">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+    <input type="text" id="mobile" placeholder="Mobile">
+    <input type="date" id="dob">
+
+    <select id="gender">
+        <option value="MALE">Male</option>
+        <option value="FEMALE">Female</option>
+        <option value="OTHERS">Others</option>
+    </select>
+
+    <input type="text" id="address" placeholder="Address">
+    <input type="text" id="dpUrl" placeholder="Profile URL">
+
+    <button onclick="registerUser()">Register</button>
+</div>
+
+<script>
+const BASE_URL = "http://localhost:8080";
+
+function registerUser() {
+    const user = {
+        username: username.value,
+        email: email.value,
+        password: password.value,
+        mobile: mobile.value,
+        dob: dob.value,
+        gender: gender.value,
+        address: address.value,
+        dpUrl: dpUrl.value
+    };
+
+    fetch(BASE_URL + "/register", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(user)
+    })
+    .then(res => res.text())
+    .then(msg => alert(msg))
+    .catch(err => console.error(err));
+}
+</script>
+
+</body>
+</html>
