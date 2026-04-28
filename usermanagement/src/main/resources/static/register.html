@@ -3,45 +3,37 @@
 <head>
     <title>Register User</title>
 
-    <style>
-        body { font-family: Arial; background:#f4f4f4; text-align:center; }
-        .box {
-            background:white; padding:20px; width:300px;
-            margin:50px auto; border-radius:10px;
-            box-shadow:0 0 10px gray;
-        }
-        input, select {
-            width:100%; padding:8px; margin:5px 0;
-        }
-        button {
-            width:100%; padding:10px;
-            background:blue; color:white; border:none;
-            cursor:pointer;
-        }
-    </style>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
 
-<div class="box">
-    <h2>Register User</h2>
+<body class="bg-light">
 
-    <input type="text" id="username" placeholder="Username">
-    <input type="email" id="email" placeholder="Email">
-    <input type="password" id="password" placeholder="Password">
-    <input type="text" id="mobile" placeholder="Mobile">
-    <input type="date" id="dob">
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        <h3 class="text-center text-primary mb-3">Register User</h3>
 
-    <select id="gender">
-        <option value="MALE">Male</option>
-        <option value="FEMALE">Female</option>
-        <option value="OTHERS">Others</option>
-    </select>
+        <div class="row">
+            <div class="col-md-6">
+                <input class="form-control mb-2" id="username" placeholder="Username">
+                <input class="form-control mb-2" id="email" placeholder="Email">
+                <input type="password" class="form-control mb-2" id="password" placeholder="Password">
+                <input class="form-control mb-2" id="mobile" placeholder="Mobile">
+            </div>
 
-    <input type="text" id="address" placeholder="Address">
-    <input type="text" id="dpUrl" placeholder="Profile URL">
+            <div class="col-md-6">
+                <input type="date" class="form-control mb-2" id="dob">
+                <select class="form-control mb-2" id="gender">
+                    <option value="MALE">Male</option>
+                    <option value="FEMALE">Female</option>
+                    <option value="OTHERS">Others</option>
+                </select>
+                <input class="form-control mb-2" id="address" placeholder="Address">
+                <input class="form-control mb-2" id="dpUrl" placeholder="Profile URL">
+            </div>
+        </div>
 
-    <button onclick="registerUser()">Register</button>
+        <button class="btn btn-primary w-100 mt-3" onclick="registerUser()">Register</button>
+    </div>
 </div>
 
 <script>
@@ -65,8 +57,7 @@ function registerUser() {
         body: JSON.stringify(user)
     })
     .then(res => res.text())
-    .then(msg => alert(msg))
-    .catch(err => console.error(err));
+    .then(msg => alert(msg));
 }
 </script>
 
